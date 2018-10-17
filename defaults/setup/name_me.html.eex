@@ -1,0 +1,11 @@
+<h1>Choose a name</h1>
+
+  <div>
+    <%= form_for @conn, setup_path(@conn, :create),
+                                            [as: :session], fn f -> %>
+        <div class="form-group">
+          <%= text_input f, :name, placeholder: "Name",
+                                  class: "form-control" %>
+        </div>
+    <%= submit "Continue", class: "btn btn-primary" %>
+  <% end %>

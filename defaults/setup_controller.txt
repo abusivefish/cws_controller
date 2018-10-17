@@ -1,0 +1,30 @@
+defmodule CwsWeb.SetupController do
+  use CwsWeb, :controller
+  alias Cws.Wizard.Name
+  alias Cws.Repo
+
+  import Ecto.Query, only: [from: 2]
+
+  def index(conn, _changeset) do
+        render conn, "name_me.html"
+  end
+
+  def create(conn, %{"session" => %{"name" => name}}) do
+    changeset = Name.changeset(%Name{}, %{name: name})
+
+    case Repo.insert(changeset) do
+      {:ok, _name} ->
+        conn
+        |> put_flash(:info, "Welcome to #{name}!")
+        |> redirect(to: setup_path(conn, :wizadmin))
+      {:error, _reason} ->
+        conn
+        |> put_flash(:error, "Please select a valid name.")
+    end
+  end
+
+  def wizadmin(conn, changeset) do
+    render conn, "make_admin.html"
+  end
+
+end

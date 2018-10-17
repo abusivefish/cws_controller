@@ -1,0 +1,29 @@
+defmodule CwsWeb.Router do
+  use CwsWeb, :router
+
+  pipeline :browser do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+  end
+
+  pipeline :api do
+    plug :accepts, ["json"]
+  end
+
+  scope "/setup", CwsWeb do
+
+    pipe_through :browser # Use the default browser stack
+    get "/", SetupController, :index
+    post "/", SetupController, :create
+    get "/1", SetupController, :wizadmin
+    post "/1", SetupController, :create_admin
+  end
+
+  # Other scopes may use custom stacks.
+  # scope "/api", CwsWeb do
+  #   pipe_through :api
+  # end
+end
