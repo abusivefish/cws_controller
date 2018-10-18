@@ -8,9 +8,9 @@ defmodule Cws.Adoption do
 
   end
 
-  def push(url) do
+  def push(url, csrf_tok, string) do
     device = "#{url}"
-    HTTPoison.get! device
+    HTTPoison.post! device, csrf_tok, string
   end
 
 end

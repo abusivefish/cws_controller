@@ -26,7 +26,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 class HelloReact extends React.Component {
   render() {
-    return (<h1>Hello broken!</h1>)
+    return (<h1>Hello Working!</h1>)
   }
 }
 ReactDOM.render(

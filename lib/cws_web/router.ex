@@ -14,9 +14,9 @@ defmodule CwsWeb.Router do
   end
 
   scope "/", CwsWeb do
-
     pipe_through :browser # Use the default browser stack
-    resources "/", MainController
+
+    get "/", MainController, :index
   end
 
   scope "/users", CwsWeb do
